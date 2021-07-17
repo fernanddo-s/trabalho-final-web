@@ -1,4 +1,4 @@
-package br.ufc.library.entities;
+package br.ufc.library.admin;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
