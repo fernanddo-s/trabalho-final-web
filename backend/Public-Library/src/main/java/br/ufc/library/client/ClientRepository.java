@@ -1,8 +1,6 @@
-package br.ufc.library.repositories;
+package br.ufc.library.client;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-
-import br.ufc.library.entities.Client;
 
 public interface ClientRepository extends JpaRepository<Client, Long>{
     
