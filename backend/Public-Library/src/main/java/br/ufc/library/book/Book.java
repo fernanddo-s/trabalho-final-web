@@ -7,10 +7,12 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 //@Data = toString, equals and hashCode, getter, setter, requieredArgsConstructor.
 @Data
+@AllArgsConstructor
 @Entity
 @Table(name = "tb_books")
 public class Book {
