@@ -5,6 +5,7 @@ import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,7 +18,8 @@ public class BookController {
 
     @Autowired
     EntityManager entityManager;
-
+    
+    @CrossOrigin(origins = "http://localhost:8080")
     @GetMapping(value = "/test")
     public String test() {
         return "Deu bom";
