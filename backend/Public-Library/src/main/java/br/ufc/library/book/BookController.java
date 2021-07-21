@@ -1,5 +1,7 @@
 package br.ufc.library.book;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
@@ -15,7 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(value = "/books")
 public class BookController {
-
+	
+	@Autowired
+	BookRepository bookRepository;
+	
     @Autowired
     EntityManager entityManager;
     
@@ -36,5 +41,10 @@ public class BookController {
         Book book = bookdto.toModel();
         entityManager.persist(book);
         return "Registered book.";
+    }
+    
+    @GetMapping(value = "/list")
+    public List<Book> getAllBooks(){
+    	return bookRepository.findAll();
     }
 }
