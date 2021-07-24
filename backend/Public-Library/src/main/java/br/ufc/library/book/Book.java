@@ -17,7 +17,7 @@ import lombok.Data;
 @Table(name = "tb_books")
 public class Book {
     
-    @Id
+  @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
@@ -31,11 +31,5 @@ public class Book {
 	
 	@NotBlank
 	private String author;
-	
-	//Construtor vazio para ecitar erro: No default constructor for entity
-	public Book() {
-		super();
-	}
-	
-	
+  
 }

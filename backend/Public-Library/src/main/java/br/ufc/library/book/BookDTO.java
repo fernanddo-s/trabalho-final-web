@@ -39,11 +39,6 @@ public class BookDTO implements Serializable{
     }
 
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
-
 	public Book toModel(){
         return new Book(this.id, this.title, this.abstractBook, this.category, this.author);
     }
