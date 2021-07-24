@@ -1,17 +1,28 @@
 <template>
   <div>
-    <input v-model="message" placeholder="Me edite" />
-    <p>A mensagem é: {{ message }}</p>
+    <CInput
+      v-model="idParaRemoao"
+      placeholder="Digite o ID do livro que você deseja remover"
+    />
 
-    <button @click="sendInclud()">Incluir</button>
+    <button @click="sendRequest()" type="button" class="btn btn-danger">
+      Remover
+    </button>
   </div>
 </template>
 
 <script>
+import HTTP from "@/views/services/HTTP";
+
 export default {
+  data() {
+    return {
+      idParaRemoao: "",
+    };
+  },
   mounted: {
-    sendInclud() {
-      // aqui vai ser a função de enviar
+    sendRequest() {
+      HTTP.remover(this.idParaRemoao);
     },
   },
 };
