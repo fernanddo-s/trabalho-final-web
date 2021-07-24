@@ -30,6 +30,7 @@ public class ClientController {
     public String addClient(@RequestBody @Valid ClientDTO clientdto) {
         System.out.println("id: "+clientdto.getId());
         System.out.println("name: "+clientdto.getName());
+        System.out.println("password: "+clientdto.getPassword());
 
         Client client = clientdto.toModel();
         entityManager.persist(client);

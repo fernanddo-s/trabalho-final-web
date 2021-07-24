@@ -33,7 +33,12 @@ public class ClientDTO implements Serializable{
 	@Email
 	private String email;
 
+	@NotBlank
+	private String password;
+
     public Client toModel(){
-        return new Client(this.id, this.name, this.cpf, this.endereco, this.email);
+        return new Client(this.id, this.name, this.cpf, this.endereco, this.email, this.password, null);
     }
+
+
 }
