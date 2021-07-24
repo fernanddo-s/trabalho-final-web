@@ -32,39 +32,7 @@ public class Book {
 	@NotBlank
 	private String author;
 	
-	public Long getId() {
-		return id;
-	}
-	
-	public String getTitle() {
-		return title;
-	}
-	
-	public String getAbstractBook() {
-		return abstractBook;
-	}
-	
-	public String getCategory() {
-		return category;
-	}
-	
-	public String getAuthor() {
-		return author;
-	}
-	
-	public Book(Long id, @NotBlank String title, String abstractBook, @NotBlank String category,
-			@NotBlank String author) {
-		super();
-		this.id = id;
-		this.title = title;
-		this.abstractBook = abstractBook;
-		this.category = category;
-		this.author = author;
-	}
-	
-	//Construtor vazio para ecitar erro: No default constructor for entity
 	public Book() {
 	}
-	
 	
 }
