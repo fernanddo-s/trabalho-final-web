@@ -1,25 +1,20 @@
 package br.ufc.library.client;
 
-import java.util.ArrayList;
+import java.io.Serializable;
 
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
-import br.ufc.library.book.Book;
-import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-//@Data = toString, equals and hashCode, getter, setter, requieredArgsConstructor.
 @Data
-@AllArgsConstructor
-@Entity
-@Table(name = "tb_clients")
-public class Client {
+@NoArgsConstructor
+public class ClientDTO implements Serializable{
+    private static final long serialVersionUID = 1L;
 
     @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,6 +36,9 @@ public class Client {
 	@NotBlank
 	private String password;
 
-	private ArrayList<Book> listBooks;
+    public Client toModel(){
+        return new Client(this.id, this.name, this.cpf, this.endereco, this.email, this.password, null);
+    }
+
 
 }
