@@ -38,6 +38,7 @@ public class BookDTO implements Serializable{
         this.author = book.getAuthor();
     }
 
+
 	public Book toModel(){
         return new Book(this.id, this.title, this.abstractBook, this.category, this.author);
     }
