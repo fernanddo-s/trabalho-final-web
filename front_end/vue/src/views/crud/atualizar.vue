@@ -1,17 +1,32 @@
 <template>
   <div>
-    <input v-model="message" placeholder="Me edite" />
+    <input v-model="message" placeholder="atualizar " />
     <p>A mensagem é: {{ message }}</p>
 
-    <button @click="sendInclud()">Incluir</button>
+    <button @click="sendRequest()">Incluir</button>
   </div>
 </template>
 
 <script>
+import HTTP from "@/views/services/HTTP";
 export default {
-  mounted: {
-    sendInclud() {
-      // aqui vai ser a função de enviar
+  data() {
+    return {
+      produtos: "",
+      message: "",
+    };
+  },
+
+  methods: {
+    sendRequest() {
+      HTTP.listaDeLivro()
+        .then((resposta) => {
+          this.produtos = resposta.data;
+          console.log(this.produtos);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
     },
   },
 };
