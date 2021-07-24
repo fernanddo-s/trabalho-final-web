@@ -38,44 +38,10 @@ public class BookDTO implements Serializable{
         this.author = book.getAuthor();
     }
 
-    public BookDTO() {
-		super();
-	}
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-
-
-
-	public Long getId() {
-		return id;
-	}
-
-
-
-	public String getTitle() {
-		return title;
-	}
-
-
-
-	public String getAbstractBook() {
-		return abstractBook;
-	}
-
-
-
-	public String getCategory() {
-		return category;
-	}
-
-
-
-	public String getAuthor() {
-		return author;
-	}
-
 
 
 	public Book toModel(){
