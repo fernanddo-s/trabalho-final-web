@@ -1,7 +1,16 @@
 <template>
   <div>
-    <input v-model="message" placeholder="Me edite" />
-    <p>A mensagem é: {{ message }}</p>
+    <CRow>
+      <CCol sm="12">
+        <CInput
+          v-model="messageAutor"
+          placeholder="Nome do autor"
+          invalid-feedback="valor inválido"
+        />
+        <CInput v-model="messageLivro" placeholder="Nome do livro" />
+        <CInput v-model="messageAno" placeholder="Ano de publicação" />
+      </CCol>
+    </CRow>
 
     <button @click="sendRequest()">Incluir</button>
   </div>
@@ -13,20 +22,15 @@ export default {
   data() {
     return {
       produtos: "",
-      message: "",
+      messageAutor: "",
+      messageLivro: "",
+      messageAno: "",
     };
   },
 
   methods: {
     sendRequest() {
-      HTTP.listar()
-        .then((resposta) => {
-          this.produtos = resposta.data;
-          console.log(this.produtos);
-        })
-        .catch((e) => {
-          console.log(e);
-        });
+      HTTP.incluir(this.messageAno, this.messageAutor, this.messageLivro);
     },
   },
 };
