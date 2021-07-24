@@ -1,5 +1,7 @@
 package br.ufc.library.client;
 
+import java.util.ArrayList;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -8,6 +10,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
+import br.ufc.library.book.Book;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -34,4 +37,10 @@ public class Client {
 	@NotBlank
 	@Email
 	private String email;
+
+	@NotBlank
+	private String password;
+
+	private ArrayList<Book> listBooks;
+
 }
