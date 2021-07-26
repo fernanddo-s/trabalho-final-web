@@ -3,7 +3,6 @@ package br.ufc.library.book;
 import java.util.List;
 import java.util.Optional;
 
-import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
@@ -26,25 +25,13 @@ public class BookController {
 	@Autowired
 	BookRepository bookRepository;
 	
-    @Autowired
-    EntityManager entityManager;
-    
-    @GetMapping(value = "/test")
-    public String test() {
-        return "Deu bom";
-    }
-
     @PostMapping(value = "/register")
     @Transactional
-    public String addBook(@RequestBody @Valid BookDTO bookdto) {
-        System.out.println("id: "+bookdto.getId());
-        System.out.println("title: "+bookdto.getTitle());
-        System.out.println("Abstract: "+bookdto.getAbstractBook());
-        System.out.println("Author: "+bookdto.getAuthor());
-
+    public ResponseEntity<Object> addBook(@RequestBody @Valid BookDTO bookdto) {
         Book book = bookdto.toModel();
-        entityManager.persist(book);
-        return "Registered book.";
+        bookRepository.save(book);
+
+        return ResponseEntity.ok("Registered book.");
     }
     
     @GetMapping(value = "/list")
@@ -52,7 +39,7 @@ public class BookController {
     	return bookRepository.findAll();
     }
     
-    @PutMapping(value = "update/{id}")
+    @PutMapping(value = "/update/{id}")
     public ResponseEntity<Object> updateBook(@RequestBody Book book, @PathVariable long id){
     	Optional<Book> BookRepository = Optional.ofNullable(bookRepository.findById(id));
 
@@ -66,20 +53,9 @@ public class BookController {
 	
 	    return ResponseEntity.noContent().build();
     }
+
+    
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

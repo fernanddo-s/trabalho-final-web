@@ -1,13 +1,16 @@
 package br.ufc.library.client;
 
-import javax.persistence.EntityManager;
+import java.util.Optional;
+
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,22 +21,36 @@ import org.springframework.web.bind.annotation.RestController;
 public class ClientController {
     
     @Autowired
-    EntityManager entityManager;
-
-    @GetMapping(value = "/test")
-    public String test() {
-        return "Deu bom - Client";
-    }
+    ClientRepository clientRepository;
 
     @PostMapping(value = "/signup")
     @Transactional
-    public String addClient(@RequestBody @Valid ClientDTO clientdto) {
-        System.out.println("id: "+clientdto.getId());
-        System.out.println("name: "+clientdto.getName());
-        System.out.println("password: "+clientdto.getPassword());
+    public ResponseEntity<Object> addClient(@RequestBody @Valid ClientDTO clientdto) {
+        boolean existsCpf, existsEmail;
+        existsCpf = clientRepository.existsByCpf(clientdto.getCpf());
+        existsEmail = clientRepository.existsByEmail(clientdto.getEmail());
+        if(existsCpf || existsEmail){
+            return ResponseEntity.badRequest().body("Error registering client.");
+        }
 
         Client client = clientdto.toModel();
-        entityManager.persist(client);
-        return "Client registration success.";
+        clientRepository.save(client);
+        
+        return ResponseEntity.created(null).body("Client registration success.") ;
+    }
+
+    @PutMapping(value = "/update/{id}")
+    public ResponseEntity<Object> updateClient(@RequestBody Client client, @PathVariable long id){
+    	Optional<Client> clientOptional = Optional.ofNullable(clientRepository.findById(id));
+
+	    if (!clientOptional.isPresent()) {
+	        return ResponseEntity.notFound().build();
+	    }
+	    
+	    client.setId(id);
+	
+	    clientRepository.save(client);
+	
+	    return ResponseEntity.noContent().build();
     }
 }

@@ -13,10 +13,12 @@ import javax.validation.constraints.NotBlank;
 import br.ufc.library.book.Book;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 //@Data = toString, equals and hashCode, getter, setter, requieredArgsConstructor.
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "tb_clients")
 public class Client {
