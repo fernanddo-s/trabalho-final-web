@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.ufc.library.client.Client;
 import br.ufc.library.client.ClientRepository;
 
 @CrossOrigin(origins = "http://localhost:8080")
@@ -27,7 +26,8 @@ public class BookController {
 	
 	@Autowired
 	BookRepository bookRepository;
-	@Autowired
+	
+    @Autowired
     ClientRepository clientRepository;
 
     @PostMapping(value = "/register")
@@ -60,18 +60,6 @@ public class BookController {
 	    return ResponseEntity.noContent().build();
     }
 
-    @GetMapping(value = "/rent-book/{idb}/{idc}")
-    @Transactional
-    public ResponseEntity<Object> rentBook(@PathVariable long idb, @PathVariable long idc){
-        Book book = bookRepository.findById(idb);
-        
-        Client client = clientRepository.findById(idc);
-        client.setListBooks(book);
-
-        clientRepository.save(client);
-        return ResponseEntity.ok("Book rented successfully.");
-    }
-    
 }
 
 
