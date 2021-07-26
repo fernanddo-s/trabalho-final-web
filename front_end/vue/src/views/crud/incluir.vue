@@ -12,7 +12,9 @@
       </CCol>
     </CRow>
 
-    <button @click="sendRequest()">Incluir</button>
+    <button @click="sendRequest()" type="button" class="btn btn-success">
+      Adicionar
+    </button>
   </div>
 </template>
 

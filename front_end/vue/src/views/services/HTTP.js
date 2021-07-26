@@ -22,6 +22,12 @@ export default {
     return http.get(conexao);
   },
 
+  remover: (ano, autor, livro) => {
+    var conexao =
+      "books/test?autor=" + autor + "&title=" + livro + "&ano=" + ano;
+    return http.get(conexao);
+  },
+  
   listaDeLivro: () => {
     console.log(http.get("books/list"));
     return http.get("books/list");
