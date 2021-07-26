@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.ufc.library.client.Client;
+import br.ufc.library.client.ClientRepository;
+
 @CrossOrigin(origins = "http://localhost:8080")
 @RestController
 @RequestMapping(value = "/books")
@@ -24,7 +27,9 @@ public class BookController {
 	
 	@Autowired
 	BookRepository bookRepository;
-	
+	@Autowired
+    ClientRepository clientRepository;
+
     @PostMapping(value = "/register")
     @Transactional
     public ResponseEntity<Object> addBook(@RequestBody @Valid BookDTO bookdto) {
@@ -40,10 +45,11 @@ public class BookController {
     }
     
     @PutMapping(value = "/update/{id}")
+    @Transactional
     public ResponseEntity<Object> updateBook(@RequestBody Book book, @PathVariable long id){
-    	Optional<Book> BookRepository = Optional.ofNullable(bookRepository.findById(id));
+    	Optional<Book> bookOptional = Optional.ofNullable(bookRepository.findById(id));
 
-	    if (!BookRepository.isPresent()) {
+	    if (!bookOptional.isPresent()) {
 	        return ResponseEntity.notFound().build();
 	    }
 	    
@@ -54,6 +60,17 @@ public class BookController {
 	    return ResponseEntity.noContent().build();
     }
 
+    @GetMapping(value = "/rent-book/{idb}/{idc}")
+    @Transactional
+    public ResponseEntity<Object> rentBook(@PathVariable long idb, @PathVariable long idc){
+        Book book = bookRepository.findById(idb);
+        
+        Client client = clientRepository.findById(idc);
+        client.setListBooks(book);
+
+        clientRepository.save(client);
+        return ResponseEntity.ok("Book rented successfully.");
+    }
     
 }
 
