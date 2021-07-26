@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "tb_books")
 public class Book {
     
-  @Id
+  	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	

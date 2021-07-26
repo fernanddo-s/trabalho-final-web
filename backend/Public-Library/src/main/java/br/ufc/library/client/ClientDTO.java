@@ -1,6 +1,7 @@
 package br.ufc.library.client;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
@@ -9,6 +10,7 @@ import javax.persistence.Id;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
+import br.ufc.library.book.Book;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -38,9 +40,9 @@ public class ClientDTO implements Serializable{
 	@NotBlank
 	private String password;
 
+	private ArrayList<Book> listBooks = new ArrayList<Book>();
+
     public Client toModel(){
-        return new Client(this.id, this.name, this.cpf, this.endereco, this.email, this.password, null);
+        return new Client(this.id, this.name, this.cpf, this.endereco, this.email, this.password, listBooks);
     }
-
-
 }

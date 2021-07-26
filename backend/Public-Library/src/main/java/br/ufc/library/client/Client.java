@@ -45,7 +45,7 @@ public class Client {
 	@NotBlank
 	private String password;
 
-	private ArrayList<Book> listBooks;
+	private ArrayList<Book> listBooks = new ArrayList<Book>();
 
 	public void setListBooks(Book book){
 		this.listBooks.add(book);
