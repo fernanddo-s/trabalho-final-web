@@ -2,6 +2,7 @@ package br.ufc.library.client;
 
 import java.util.ArrayList;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -38,11 +39,16 @@ public class Client {
 
 	@NotBlank
 	@Email
+	@Column(unique = true)
 	private String email;
 
 	@NotBlank
 	private String password;
 
 	private ArrayList<Book> listBooks;
+
+	public void setListBooks(Book book){
+		this.listBooks.add(book);
+	}
 
 }

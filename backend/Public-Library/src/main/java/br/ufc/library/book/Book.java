@@ -9,10 +9,12 @@ import javax.validation.constraints.NotBlank;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 //@Data = toString, equals and hashCode, getter, setter, requieredArgsConstructor.
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "tb_books")
 public class Book {
