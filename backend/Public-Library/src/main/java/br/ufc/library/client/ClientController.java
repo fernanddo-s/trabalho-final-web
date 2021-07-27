@@ -95,6 +95,12 @@ public class ClientController {
     @DeleteMapping(value = "/delete/{id}")
     @Transactional
     public ResponseEntity<Object> deleteProfile(@PathVariable long id){
+        Optional<Client> clientOptional = Optional.ofNullable(clientRepository.findById(id));
+
+        if(clientOptional.isEmpty()){
+            return ResponseEntity.notFound().build();
+        }
+        
         Client client = clientRepository.findById(id);
         clientRepository.delete(client);
 
